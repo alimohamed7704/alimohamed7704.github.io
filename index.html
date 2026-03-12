@@ -222,27 +222,6 @@
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   ANIMATION RULES SUMMARY
-   ─────────────────────────────────────────────────────────────
-   CHAR-BY-CHAR (typewriter):
-     • help  — "Available Commands:" header only
-     • whoami — name, job title, univ line, "⟫ About Me" header
-     • projects — each project title
-     • skills — every header (⟫ …) and value line
-     • contact — every line
-     • default error line
-
-   LINE-BY-LINE (full line pops in at once, 0.8s between lines):
-     • help — the 6 command lines after the header
-     • whoami — the 3 bio paragraphs
-     • projects — the bullet points under each project
-
-   GLOW FADE-IN (card entrance):
-     • avatar-ring (profile pic holder) when addWhoami runs
-     • each proj-img-slot when addProject appends the image row
-     • profile pic img and project imgs on load
-   ═══════════════════════════════════════════════════════════════ */
 
 const CHAR_MS  = 32;   // ms per character for typewriter lines
 const SLOW_MS  = 800;  // ms between slow dramatic line-by-line items
@@ -687,7 +666,7 @@ function runCommand(cmd) {
 
     case "skills":
       addGap();
-      addLineTyped("Technical Skills");
+      addLineTyped("My Skills");
       addSep();
       addLineTyped("⟫ Programming Languages");
       addLinePop("", "   C++, C#, Python, Java, JavaScript, HTML/CSS, SQL");
@@ -778,3 +757,4 @@ document.addEventListener("click", () => input.focus());
 </script>
 </body>
 </html>
+
