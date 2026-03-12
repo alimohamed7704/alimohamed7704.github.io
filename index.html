@@ -18,12 +18,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
     height: 100vh;
     overflow: hidden;
+    padding: 8px;
   }
 
   .terminal-wrapper {
-    width: 1500px;
+    width: 100%;
+    max-width: 1500px;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -44,8 +47,8 @@
     gap: 0;
   }
 
-  .p-user  { color: #529f5b; font-size: 20px; font-weight: bold; }
-  .p-rest  { color: #e8e8e8; font-size: 20px; margin-right: -3px; }
+  .p-user  { color: #529f5b; font-size: clamp(13px, 2vw, 20px); font-weight: bold; }
+  .p-rest  { color: #e8e8e8; font-size: clamp(13px, 2vw, 20px); margin-right: -3px; }
 
   #cmd {
     background: transparent;
@@ -53,9 +56,10 @@
     outline: none;
     color: #6ddb7a;
     font-family: "Courier New", monospace;
-    font-size: 20px;
+    font-size: clamp(13px, 2vw, 20px);
     flex: 1;
     caret-color: #6ddb7a;
+    min-width: 0;
   }
 
   #output {
@@ -73,14 +77,14 @@
   #out-inner { margin-top: 0; }
 
   .line {
-    font-size: 18px;
+    font-size: clamp(12px, 1.8vw, 18px);
     line-height: 1.85;
     white-space: pre-wrap;
     word-break: break-word;
   }
   .g  { color: #6ddb7a; }
   .w  { color: #e8e8e8; }
-  .d  { color: rgba(232,232,232,0.4); font-size: 13px; }
+  .d  { color: rgba(232,232,232,0.4); font-size: clamp(10px, 1.3vw, 13px); }
   .r  { color: #ff6b6b; }
 
   hr.sep {
@@ -96,7 +100,7 @@
   }
 
   .echo {
-    font-size: 18px;
+    font-size: clamp(12px, 1.8vw, 18px);
     line-height: 1.85;
     margin-top: 4px;
   }
@@ -104,6 +108,7 @@
   .contact-link {
     color: #6ddb7a;
     text-decoration: none;
+    word-break: break-all;
   }
   .contact-link:hover {
     text-decoration: underline;
@@ -118,8 +123,9 @@
     padding: 5px 24px 8px 24px;
     border-top: 1px solid rgba(155,233,168,0.08);
     background: rgba(10,18,35,0.3);
-    font-size: 20px;
+    font-size: clamp(11px, 1.6vw, 20px);
     gap: 3px;
+    flex-wrap: wrap;
   }
   .hint-bar .hw { color: #e8e8e8; }
   .hint-bar .hg { color: #6ddb7a; }
@@ -139,29 +145,31 @@
     margin-bottom: 24px;
   }
   .avatar-ring {
-    width: 140px; height: 140px;
+    width: clamp(80px, 12vw, 140px);
+    height: clamp(80px, 12vw, 140px);
     border-radius: 50%;
     border: 2px solid #6ddb7a;
     box-shadow: 0 0 24px rgba(109,219,122,0.35);
     background: rgba(109,219,122,0.07);
     overflow: hidden;
     display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
   .avatar-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-  .whoami-name { color:#6ddb7a; font-size:24px; font-weight:bold; text-align:center; }
-  .whoami-title { color:#e8e8e8; font-size:18px; text-align:center; line-height:1.75; }
+  .whoami-name { color:#6ddb7a; font-size:clamp(16px,2.5vw,24px); font-weight:bold; text-align:center; }
+  .whoami-title { color:#e8e8e8; font-size:clamp(12px,1.8vw,18px); text-align:center; line-height:1.75; }
   .whoami-title .univ { color:#6ddb7a; }
-  .whoami-hr { width:60%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
-  .whoami-bio { width:100%; font-size:16px; line-height:1.95; color:#e8e8e8; }
-  .whoami-bio .bio-title { color:#6ddb7a; font-size:17px; font-weight:bold; margin-bottom:10px; }
+  .whoami-hr { width:80%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
+  .whoami-bio { width:100%; font-size:clamp(12px,1.5vw,16px); line-height:1.95; color:#e8e8e8; }
+  .whoami-bio .bio-title { color:#6ddb7a; font-size:clamp(13px,1.6vw,17px); font-weight:bold; margin-bottom:10px; }
   .whoami-bio p { margin-bottom:13px; }
 
-  /* project card — vertical layout */
+  /* project card */
   .proj-card { display: flex; flex-direction: column; gap: 0; }
 
   .proj-name {
     color: #6ddb7a;
-    font-size: 18px;
+    font-size: clamp(13px, 1.8vw, 18px);
     font-weight: bold;
     margin-bottom: 5px;
   }
@@ -170,7 +178,7 @@
 
   .proj-tag {
     display: inline-block;
-    font-size: 12px;
+    font-size: clamp(10px, 1.1vw, 12px);
     color: #529f5b;
     border: 1px solid rgba(82,159,91,0.4);
     border-radius: 3px;
@@ -186,7 +194,7 @@
   }
 
   .proj-bullets li {
-    font-size: 15px;
+    font-size: clamp(11px, 1.5vw, 15px);
     color: #e8e8e8;
     line-height: 1.75;
     padding-left: 16px;
@@ -200,12 +208,20 @@
     color: #529f5b;
   }
 
-  /* 3-image row */
+  /* 3-image row — responsive grid */
   .proj-imgs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .proj-imgs { grid-template-columns: 1fr; }
+  }
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    .proj-imgs { grid-template-columns: repeat(2, 1fr); }
   }
 
   .proj-img-slot {
@@ -241,8 +257,16 @@
     letter-spacing: 0.03em;
   }
 
-  .proj-img-slot .ph svg {
-    opacity: 0.28;
+  .proj-img-slot .ph svg { opacity: 0.28; }
+
+  /* ── mobile tweaks ── */
+  @media (max-width: 480px) {
+    body { padding: 4px; }
+    .terminal-wrapper { height: 96vh; border-radius: 6px; }
+    .input-bar { padding: 10px 12px; }
+    #output { padding: 12px 12px 8px 12px; }
+    .hint-bar { padding: 4px 12px 6px; justify-content: center; }
+    .whoami-hr { width: 90%; }
   }
 
 </style>
@@ -258,16 +282,16 @@
 
   <div id="output">
     <div id="out-inner">
-      <div class="line g" style="font-size:22px; font-weight:bold; margin-bottom:4px;">Welcome to Ali's Portfolio</div>
-      <div class="line w" style="font-size:18px; margin-bottom:6px;">Type a command to begin:</div>
+      <div class="line g" style="font-size:clamp(16px,2.5vw,22px); font-weight:bold; margin-bottom:4px;">Welcome to Ali's Portfolio</div>
+      <div class="line w" style="font-size:clamp(13px,1.8vw,18px); margin-bottom:6px;">Type a command to begin:</div>
       <hr class="sep">
-      <div class="line g" style="font-size:18px; margin-bottom:2px;">Available Commands:</div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ whoami</span><span class="w">        — Learn more about me</span></div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ skills</span><span class="w">        — See my skills</span></div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ projects</span><span class="w">      — View my projects</span></div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ contact</span><span class="w">       — Get in touch</span></div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ clear</span><span class="w">         — Clear the screen</span></div>
-      <div class="line" style="font-size:17px;"><span class="g">⟫ help</span><span class="w">          — Show commands</span></div>
+      <div class="line g" style="font-size:clamp(13px,1.8vw,18px); margin-bottom:2px;">Available Commands:</div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ whoami</span><span class="w">        — Learn more about me</span></div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ skills</span><span class="w">        — See my skills</span></div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ projects</span><span class="w">      — View my projects</span></div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ contact</span><span class="w">       — Get in touch</span></div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ clear</span><span class="w">         — Clear the screen</span></div>
+      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ help</span><span class="w">          — Show commands</span></div>
     </div>
   </div>
 
@@ -385,7 +409,6 @@
     </div>`;
   }
 
-  /* imgs: array of 3 filenames or nulls */
   function addProject(name, tags, bullets, imgs) {
     const card = document.createElement("div");
     card.className = "proj-card";
@@ -399,10 +422,9 @@
       <ul class="proj-bullets">${liHTML}</ul>
     `;
 
-    // build the 3-image row
     const row = document.createElement("div");
     row.className = "proj-imgs";
-    (imgs || [null, null, null]).forEach(src => row.appendChild(imgSlot(src)));
+    (imgs && imgs.length ? imgs : [null, null, null]).forEach(src => row.appendChild(imgSlot(src)));
     card.appendChild(row);
 
     inner.appendChild(card);
@@ -525,6 +547,7 @@
         addGap();
         addLine('<span class="g">Get In Touch</span>');
         addSep();
+        addLine('<span class="g">⟫ Phone:&nbsp;&nbsp;&nbsp;</span><a class="contact-link" href="tel:+201096101682">+20 109 610 1682</a>');
         addLine('<span class="g">⟫ Email:&nbsp;&nbsp;&nbsp;</span><a class="contact-link" href="mailto:alimohamedali7704@gmail.com">alimohamedali7704@gmail.com</a>');
         addLine('<span class="g">⟫ GitHub:&nbsp;&nbsp;</span><a class="contact-link" href="https://github.com/alimohamed7704" target="_blank">github.com/alimohamed7704</a>');
         addLine('<span class="g">⟫ LinkedIn:</span><a class="contact-link" href="https://www.linkedin.com/in/ali-mohamed-a3532331a/" target="_blank">linkedin.com/in/Ali-Mohamed</a>');
