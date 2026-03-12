@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ali Portfolio Terminal</title>
 <style>
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    background: #0a0f1c00;
     background-image: url("background.png");
     background-size: cover;
     background-position: center;
@@ -30,8 +28,7 @@
     height: 90vh;
     display: flex;
     flex-direction: column;
-    background: rgba(10, 18, 35, 0);
-    border: 1px solid rgba(155, 233, 168, 0.13);
+    border: 1px solid rgba(155,233,168,0.13);
     border-radius: 10px;
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
     overflow: hidden;
@@ -42,13 +39,12 @@
     display: flex;
     align-items: center;
     padding: 13px 24px;
-    border-bottom: 1px solid rgba(155, 233, 168, 0.12);
-    background: rgba(10, 18, 35, 0);
+    border-bottom: 1px solid rgba(155,233,168,0.12);
     gap: 0;
   }
 
-  .p-user  { color: #529f5b; font-size: clamp(13px, 2vw, 20px); font-weight: bold; }
-  .p-rest  { color: #e8e8e8; font-size: clamp(13px, 2vw, 20px); margin-right: -3px; }
+  .p-user { color:#529f5b; font-size:clamp(13px,2vw,20px); font-weight:bold; }
+  .p-rest { color:#e8e8e8; font-size:clamp(13px,2vw,20px); margin-right:-3px; }
 
   #cmd {
     background: transparent;
@@ -56,7 +52,7 @@
     outline: none;
     color: #6ddb7a;
     font-family: "Courier New", monospace;
-    font-size: clamp(13px, 2vw, 20px);
+    font-size: clamp(13px,2vw,20px);
     flex: 1;
     caret-color: #6ddb7a;
     min-width: 0;
@@ -71,49 +67,28 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(155,233,168,0.2) transparent;
   }
-  #output::-webkit-scrollbar { width: 5px; }
-  #output::-webkit-scrollbar-thumb { background: rgba(155,233,168,0.2); border-radius: 3px; }
-
-  #out-inner { margin-top: 0; }
+  #output::-webkit-scrollbar { width:5px; }
+  #output::-webkit-scrollbar-thumb { background:rgba(155,233,168,0.2); border-radius:3px; }
+  #out-inner { margin-top:0; }
 
   .line {
-    font-size: clamp(12px, 1.8vw, 18px);
+    font-size: clamp(12px,1.8vw,18px);
     line-height: 1.85;
     white-space: pre-wrap;
     word-break: break-word;
+    min-height: 1.4em;
   }
-  .g  { color: #6ddb7a; }
-  .w  { color: #e8e8e8; }
-  .d  { color: rgba(232,232,232,0.4); font-size: clamp(10px, 1.3vw, 13px); }
-  .r  { color: #ff6b6b; }
+  .g { color:#6ddb7a; }
+  .w { color:#e8e8e8; }
+  .r { color:#ff6b6b; }
 
-  hr.sep {
-    border: none;
-    border-top: 1px solid rgba(232,232,232,0.25);
-    margin: 3px 0;
-  }
+  hr.sep      { border:none; border-top:1px solid rgba(232,232,232,0.25); margin:3px 0; }
+  hr.proj-sep { border:none; border-top:1px solid rgba(109,219,122,0.12); margin:18px 0; }
 
-  hr.proj-sep {
-    border: none;
-    border-top: 1px solid rgba(109,219,122,0.12);
-    margin: 18px 0;
-  }
+  .echo { font-size:clamp(12px,1.8vw,18px); line-height:1.85; margin-top:4px; }
 
-  .echo {
-    font-size: clamp(12px, 1.8vw, 18px);
-    line-height: 1.85;
-    margin-top: 4px;
-  }
-
-  .contact-link {
-    color: #6ddb7a;
-    text-decoration: none;
-    word-break: break-all;
-  }
-  .contact-link:hover {
-    text-decoration: underline;
-    color: #9be9a8;
-  }
+  .contact-link { color:#6ddb7a; text-decoration:none; word-break:break-all; }
+  .contact-link:hover { text-decoration:underline; color:#9be9a8; }
 
   .hint-bar {
     flex-shrink: 0;
@@ -123,158 +98,104 @@
     padding: 5px 24px 8px 24px;
     border-top: 1px solid rgba(155,233,168,0.08);
     background: rgba(10,18,35,0.3);
-    font-size: clamp(11px, 1.6vw, 20px);
+    font-size: clamp(11px,1.6vw,20px);
     gap: 3px;
     flex-wrap: wrap;
   }
-  .hint-bar .hw { color: #e8e8e8; }
-  .hint-bar .hg { color: #6ddb7a; }
+  .hint-bar .hw { color:#e8e8e8; }
+  .hint-bar .hg { color:#6ddb7a; }
+
+  /* blinking cursor */
+  .tw-cursor {
+    display: inline-block;
+    width: 8px; height: 1.1em;
+    background: #6ddb7a;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink .7s step-end infinite;
+  }
+  @keyframes blink { 50%{opacity:0;} }
+
+  /* ── simple fade in — for lines, image slots, avatar ring ── */
+  @keyframes simpleFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: simpleFadeIn 0.6s ease-out forwards;
+  }
+
+  .card-glow-enter {
+    opacity: 0;
+    animation: simpleFadeIn 0.9s ease-out forwards;
+  }
 
   /* whoami */
-  .whoami-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 18px 0 14px 0;
+  .whoami-card  { display:flex; flex-direction:column; align-items:center; padding:18px 0 14px; }
+  .whoami-top   { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:24px; }
+  .avatar-ring  {
+    width:clamp(80px,12vw,140px); height:clamp(80px,12vw,140px);
+    border-radius:50%; border:2px solid #6ddb7a;
+    box-shadow:0 0 24px rgba(109,219,122,.35);
+    background:rgba(109,219,122,.07);
+    overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .whoami-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
+  /* profile pic — starts hidden, glow in on load */
+  .avatar-ring img {
+    width:100%; height:100%; object-fit:cover; border-radius:50%;
+    opacity:0;
   }
-  .avatar-ring {
-    width: clamp(80px, 12vw, 140px);
-    height: clamp(80px, 12vw, 140px);
-    border-radius: 50%;
-    border: 2px solid #6ddb7a;
-    box-shadow: 0 0 24px rgba(109,219,122,0.35);
-    background: rgba(109,219,122,0.07);
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .avatar-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-  .whoami-name { color:#6ddb7a; font-size:clamp(16px,2.5vw,24px); font-weight:bold; text-align:center; }
-  .whoami-title { color:#e8e8e8; font-size:clamp(12px,1.8vw,18px); text-align:center; line-height:1.75; }
+  .avatar-ring img.img-revealed { animation: simpleFadeIn 0.9s ease-out forwards; }
+
+  .whoami-name  { color:#6ddb7a; font-size:clamp(16px,2.5vw,24px); font-weight:bold; text-align:center; min-height:1.4em; }
+  .whoami-title { color:#e8e8e8; font-size:clamp(12px,1.8vw,18px); text-align:center; line-height:1.75; min-height:1.4em; }
   .whoami-title .univ { color:#6ddb7a; }
-  .whoami-hr { width:80%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
-  .whoami-bio { width:100%; font-size:clamp(12px,1.5vw,16px); line-height:1.95; color:#e8e8e8; }
-  .whoami-bio .bio-title { color:#6ddb7a; font-size:clamp(13px,1.6vw,17px); font-weight:bold; margin-bottom:10px; }
-  .whoami-bio p { margin-bottom:13px; }
+  .whoami-hr    { width:80%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
+  .whoami-bio   { width:100%; font-size:clamp(12px,1.5vw,16px); line-height:1.95; color:#e8e8e8; }
+  .whoami-bio .bio-title { color:#6ddb7a; font-size:clamp(13px,1.6vw,17px); font-weight:bold; margin-bottom:10px; min-height:1.4em; }
+  .whoami-bio p { margin-bottom:13px; min-height:1.4em; }
 
-  /* project card */
-  .proj-card { display: flex; flex-direction: column; gap: 0; }
+  /* projects */
+  .proj-card    { display:flex; flex-direction:column; }
+  .proj-name    { color:#6ddb7a; font-size:clamp(13px,1.8vw,18px); font-weight:bold; margin-bottom:5px; min-height:1.4em; }
+  .proj-tags    { margin-bottom:8px; }
+  .proj-tag     { display:inline-block; font-size:clamp(10px,1.1vw,12px); color:#529f5b; border:1px solid rgba(82,159,91,.4); border-radius:3px; padding:0 7px; margin-right:5px; margin-bottom:4px; }
+  .proj-bullets { list-style:none; padding:0; margin:0 0 14px 0; }
+  .proj-bullets li { font-size:clamp(11px,1.5vw,15px); color:#e8e8e8; line-height:1.75; padding-left:16px; position:relative; min-height:1.4em; }
+  .proj-bullets li::before { content:"›"; position:absolute; left:0; color:#529f5b; }
 
-  .proj-name {
-    color: #6ddb7a;
-    font-size: clamp(13px, 1.8vw, 18px);
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .proj-tags { margin-bottom: 8px; }
-
-  .proj-tag {
-    display: inline-block;
-    font-size: clamp(10px, 1.1vw, 12px);
-    color: #529f5b;
-    border: 1px solid rgba(82,159,91,0.4);
-    border-radius: 3px;
-    padding: 0 7px;
-    margin-right: 5px;
-    margin-bottom: 4px;
-  }
-
-  .proj-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 14px 0;
-  }
-
-  .proj-bullets li {
-    font-size: clamp(11px, 1.5vw, 15px);
-    color: #e8e8e8;
-    line-height: 1.75;
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .proj-bullets li::before {
-    content: "›";
-    position: absolute;
-    left: 0;
-    color: #529f5b;
-  }
-
-  /* 3-image row — responsive grid */
-  .proj-imgs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 4px;
-  }
-
-  @media (max-width: 600px) {
-    .proj-imgs { grid-template-columns: 1fr; }
-  }
-
-  @media (min-width: 601px) and (max-width: 900px) {
-    .proj-imgs { grid-template-columns: repeat(2, 1fr); }
-  }
+  .proj-imgs { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:4px; }
+  @media(max-width:600px)                       { .proj-imgs{grid-template-columns:1fr;} }
+  @media(min-width:601px) and (max-width:900px) { .proj-imgs{grid-template-columns:repeat(2,1fr);} }
 
   .proj-img-slot {
-    aspect-ratio: 16 / 9;
-    border-radius: 6px;
-    border: 1px solid rgba(109,219,122,0.22);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    overflow: hidden;
-    background: rgba(8, 20, 12, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    aspect-ratio:16/9; border-radius:6px;
+    border:1px solid rgba(109,219,122,.22); box-shadow:0 4px 16px rgba(0,0,0,.5);
+    overflow:hidden; background:rgba(8,20,12,.7);
+    display:flex; align-items:center; justify-content:center;
+    /* starts invisible — JS adds card-glow-enter */
+    opacity: 0;
   }
+  .proj-img-slot img { width:100%; height:100%; object-fit:cover; display:block; opacity:0; }
+  .proj-img-slot img.img-revealed { animation: simpleFadeIn 0.9s ease-out forwards; }
 
-  .proj-img-slot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .proj-img-slot .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; width:100%; height:100%; color:rgba(109,219,122,.3); font-size:12px; }
+  .proj-img-slot .ph svg { opacity:.28; }
+
+  @media(max-width:480px) {
+    body { padding:4px; }
+    .terminal-wrapper { height:96vh; border-radius:6px; }
+    .input-bar { padding:10px 12px; }
+    #output { padding:12px 12px 8px 12px; }
+    .hint-bar { padding:4px 12px 6px; justify-content:center; }
+    .whoami-hr { width:90%; }
   }
-
-  .proj-img-slot .ph {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    width: 100%;
-    height: 100%;
-    color: rgba(109,219,122,0.3);
-    font-size: 12px;
-    letter-spacing: 0.03em;
-  }
-
-  .proj-img-slot .ph svg { opacity: 0.28; }
-
-  /* ── mobile tweaks ── */
-  @media (max-width: 480px) {
-    body { padding: 4px; }
-    .terminal-wrapper { height: 96vh; border-radius: 6px; }
-    .input-bar { padding: 10px 12px; }
-    #output { padding: 12px 12px 8px 12px; }
-    .hint-bar { padding: 4px 12px 6px; justify-content: center; }
-    .whoami-hr { width: 90%; }
-  }
-
 </style>
 </head>
 <body>
-
 <div class="terminal-wrapper">
-
   <div class="input-bar">
     <span class="p-user">ali</span><span class="p-rest">@portfolio:~$&nbsp;</span>
     <input id="cmd" autofocus autocomplete="off" spellcheck="false">
@@ -282,10 +203,10 @@
 
   <div id="output">
     <div id="out-inner">
-      <div class="line g" style="font-size:clamp(16px,2.5vw,22px); font-weight:bold; margin-bottom:4px;">Welcome to Ali's Portfolio</div>
-      <div class="line w" style="font-size:clamp(13px,1.8vw,18px); margin-bottom:6px;">Type a command to begin:</div>
+      <div class="line g" style="font-size:clamp(16px,2.5vw,22px);font-weight:bold;margin-bottom:4px;">Welcome to Ali's Portfolio</div>
+      <div class="line w" style="font-size:clamp(13px,1.8vw,18px);margin-bottom:6px;">Type a command to begin:</div>
       <hr class="sep">
-      <div class="line g" style="font-size:clamp(13px,1.8vw,18px); margin-bottom:2px;">Available Commands:</div>
+      <div class="line g" style="font-size:clamp(13px,1.8vw,18px);margin-bottom:2px;">Available Commands:</div>
       <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ whoami</span><span class="w">        — Learn more about me</span></div>
       <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ skills</span><span class="w">        — See my skills</span></div>
       <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ projects</span><span class="w">      — View my projects</span></div>
@@ -298,275 +219,562 @@
   <div class="hint-bar">
     <span class="hw">Hint:&nbsp; Type </span><span class="hg">"help"</span><span class="hw"> for commands.</span>
   </div>
-
 </div>
 
 <script>
-  const input  = document.getElementById("cmd");
-  const outEl  = document.getElementById("output");
-  const inner  = document.getElementById("out-inner");
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATION RULES SUMMARY
+   ─────────────────────────────────────────────────────────────
+   CHAR-BY-CHAR (typewriter):
+     • help  — "Available Commands:" header only
+     • whoami — name, job title, univ line, "⟫ About Me" header
+     • projects — each project title
+     • skills — every header (⟫ …) and value line
+     • contact — every line
+     • default error line
 
-  let cmdHistory = [];
-  let histIdx    = -1;
+   LINE-BY-LINE (full line pops in at once, 0.8s between lines):
+     • help — the 6 command lines after the header
+     • whoami — the 3 bio paragraphs
+     • projects — the bullet points under each project
 
-  input.addEventListener("keydown", function(e) {
-    if (e.ctrlKey && e.key === "c") {
-      e.preventDefault();
-      inner.innerHTML = "";
-      addEcho(input.value + "^C");
-      input.value = "";
-      histIdx = -1;
-      return;
+   GLOW FADE-IN (card entrance):
+     • avatar-ring (profile pic holder) when addWhoami runs
+     • each proj-img-slot when addProject appends the image row
+     • profile pic img and project imgs on load
+   ═══════════════════════════════════════════════════════════════ */
+
+const CHAR_MS  = 32;   // ms per character for typewriter lines
+const SLOW_MS  = 800;  // ms between slow dramatic line-by-line items
+
+const outEl = document.getElementById("output");
+const inner = document.getElementById("out-inner");
+const input = document.getElementById("cmd");
+
+let queue      = [];
+let running    = false;
+let cancelled  = false;
+let cmdHistory = [];
+let histIdx    = -1;
+
+function resetEngine() { cancelled = true; queue = []; running = false; }
+function startEngine() { cancelled = false; if (!running) pump(); }
+function pump() {
+  if (cancelled || queue.length === 0) { running = false; return; }
+  running = true;
+  queue.shift()(pump);
+}
+
+function scroll()     { outEl.scrollTop = outEl.scrollHeight; }
+function softScroll() {
+  // only auto-scroll if user is within 120px of the bottom
+  const distFromBottom = outEl.scrollHeight - outEl.scrollTop - outEl.clientHeight;
+  if (distFromBottom < 120) outEl.scrollTop = outEl.scrollHeight;
+}
+
+/* ── typeText: char-by-char into any node with .textContent ── */
+function typeText(el, text, next) {
+  let i = 0;
+  function tick() {
+    if (cancelled) { el.textContent = text; next(); return; }
+    if (i >= text.length) { next(); return; }
+    el.textContent += text[i++];
+    softScroll();
+    setTimeout(tick, CHAR_MS);
+  }
+  tick();
+}
+
+/* ── qLineTyped: typewriter line (char-by-char), supports coloured segments ── */
+function qLineTyped(segments, cls, style) {
+  queue.push(function(next) {
+    if (cancelled) return;
+    const div = document.createElement("div");
+    div.className = cls || "line";
+    if (style) div.setAttribute("style", style);
+    inner.appendChild(div);
+
+    const cur = document.createElement("span");
+    cur.className = "tw-cursor";
+    div.appendChild(cur);
+
+    const spanEls = segments.map(seg => {
+      let el;
+      if (seg.href) {
+        el = document.createElement("a");
+        el.href = seg.href;
+        el.className = "contact-link";
+        if (seg.target) el.target = seg.target;
+      } else {
+        el = document.createElement("span");
+      }
+      if (seg.color) el.style.color = seg.color;
+      div.insertBefore(el, cur);
+      return el;
+    });
+
+    softScroll();
+    let si = 0;
+    function nextSeg() {
+      if (cancelled) {
+        segments.forEach((s,i) => { spanEls[i].textContent = s.text; });
+        cur.remove(); next(); return;
+      }
+      if (si >= segments.length) { cur.remove(); softScroll(); setTimeout(next, 60); return; }
+      const el = spanEls[si], text = segments[si].text; si++;
+      let ci = 0;
+      function typeChar() {
+        if (cancelled) { el.textContent = text; nextSeg(); return; }
+        if (ci >= text.length) { nextSeg(); return; }
+        el.textContent += text[ci++];
+        softScroll();
+        setTimeout(typeChar, CHAR_MS);
+      }
+      typeChar();
     }
-    if (e.key === "Enter") {
-      const raw = input.value;
-      const cmd = raw.trim().toLowerCase();
-      input.value = "";
-      histIdx = -1;
-      if (!raw.trim()) return;
-      cmdHistory.unshift(raw.trim());
-      inner.innerHTML = "";
-      addEcho(raw);
-      runCommand(cmd);
-      return;
-    }
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
-      return;
-    }
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      histIdx > 0 ? (histIdx--, input.value = cmdHistory[histIdx]) : (histIdx = -1, input.value = "");
-      return;
-    }
+    nextSeg();
   });
+}
 
-  function addEcho(text) {
-    const d = document.createElement("div");
-    d.className = "echo";
-    d.innerHTML = '<span class="g">ali</span><span class="w">@portfolio:~$&nbsp;</span>'
-                + '<span style="color:#9be9a8">' + esc(text) + '</span>';
-    inner.appendChild(d);
-  }
+/* ── qLinePop: whole line fades in at once, then waits SLOW_MS ── */
+function qLinePop(segments, cls, style) {
+  queue.push(function(next) {
+    if (cancelled) return;
+    const div = document.createElement("div");
+    div.className = (cls || "line") + " fade-in";
+    if (style) div.setAttribute("style", style);
+    segments.forEach(seg => {
+      let el;
+      if (seg.href) {
+        el = document.createElement("a");
+        el.href = seg.href;
+        el.className = "contact-link";
+        if (seg.target) el.target = seg.target;
+      } else {
+        el = document.createElement("span");
+      }
+      if (seg.color) el.style.color = seg.color;
+      el.textContent = seg.text;
+      div.appendChild(el);
+    });
+    inner.appendChild(div);
+    softScroll();
+    setTimeout(next, SLOW_MS);
+  });
+}
 
-  function addLine(html) {
-    const d = document.createElement("div");
-    d.className = "line";
-    d.innerHTML = html;
-    inner.appendChild(d);
-  }
-
-  function addSep() {
+/* ── qSep / qGap ── */
+function qSep(cls) {
+  queue.push(function(next) {
+    if (cancelled) return;
     const hr = document.createElement("hr");
-    hr.className = "sep";
+    hr.className = cls || "sep";
     inner.appendChild(hr);
-  }
-
-  function addProjSep() {
-    const hr = document.createElement("hr");
-    hr.className = "proj-sep";
-    inner.appendChild(hr);
-  }
-
-  function addGap() {
-    const d = document.createElement("div");
-    d.style.height = "5px";
+    setTimeout(next, 20);
+  });
+}
+function qGap() {
+  queue.push(function(next) {
+    if (cancelled) return;
+    const d = document.createElement("div"); d.style.height = "5px";
     inner.appendChild(d);
-  }
+    setTimeout(next, 5);
+  });
+}
 
-  function esc(s) {
-    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  }
+/* ── convenience wrappers ── */
+function addLineTyped(g, w) {
+  const segs = [];
+  if (g) segs.push({ text: g, color: "#6ddb7a" });
+  if (w) segs.push({ text: w, color: "#e8e8e8" });
+  qLineTyped(segs);
+}
+function addLineTypedRaw(segs) { qLineTyped(segs); }
 
-  function imgSlot(src) {
-    const slot = document.createElement("div");
-    slot.className = "proj-img-slot";
-    if (src) {
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "";
-      img.onerror = function() {
-        this.parentElement.innerHTML = phHTML();
-      };
-      slot.appendChild(img);
-    } else {
+function addLinePop(g, w) {
+  const segs = [];
+  if (g) segs.push({ text: g, color: "#6ddb7a" });
+  if (w) segs.push({ text: w, color: "#e8e8e8" });
+  qLinePop(segs);
+}
+function addLinePopRaw(segs) { qLinePop(segs); }
+
+function addSep()     { qSep("sep"); }
+function addProjSep() { qSep("proj-sep"); }
+function addGap()     { qGap(); }
+
+/* ── image helpers ── */
+function phHTML() {
+  return `<div class="ph">
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+      <rect x="4" y="8" width="40" height="28" rx="3" stroke="#6ddb7a" stroke-width="2"/>
+      <path d="M4 30 L14 19 L22 27 L31 17 L44 30" stroke="#6ddb7a" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="14" cy="17" r="3" stroke="#6ddb7a" stroke-width="2"/>
+      <path d="M17 40 H31" stroke="#6ddb7a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M24 36 V40" stroke="#6ddb7a" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span>screenshot</span>
+  </div>`;
+}
+
+function imgSlot(src) {
+  const slot = document.createElement("div");
+  slot.className = "proj-img-slot";
+  if (src) {
+    const img = document.createElement("img");
+    img.src = src; img.alt = "";
+    img.onload  = function() { this.classList.add("img-revealed"); };
+    img.onerror = function() {
+      // placeholder is visible — reset slot opacity and show ph
+      slot.style.opacity = "1";
       slot.innerHTML = phHTML();
+    };
+    slot.appendChild(img);
+  } else {
+    slot.style.opacity = "1";
+    slot.innerHTML = phHTML();
+  }
+  return slot;
+}
+
+/* stagger glow entrance on a list of elements */
+function glowEnterAll(els, baseDelay) {
+  els.forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add("card-glow-enter");
+    }, baseDelay + i * 200);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WHOAMI
+   — avatar-ring: glow entrance
+   — name, title, univ, bio-title: char-by-char
+   — 3 bio paragraphs: line-by-line (SLOW_MS each)
+   ══════════════════════════════════════════════════════════════ */
+function addWhoami() {
+  queue.push(function(next) {
+    if (cancelled) return;
+
+    const card = document.createElement("div");
+    card.className = "whoami-card";
+    inner.appendChild(card);
+
+    const top = document.createElement("div");
+    top.className = "whoami-top";
+    card.appendChild(top);
+
+    // avatar ring — glow entrance
+    const ring = document.createElement("div");
+    ring.className = "avatar-ring";
+    const profImg = document.createElement("img");
+    profImg.src = "profile pic.jpg"; profImg.alt = "Ali";
+    profImg.onload  = function() { this.classList.add("img-revealed"); };
+    profImg.onerror = function() {
+      this.style.display = "none";
+      this.parentElement.innerHTML = '<span style="font-size:56px">👤</span>';
+    };
+    ring.appendChild(profImg);
+    // ring starts invisible, glow in right away
+    ring.style.opacity = "0";
+    top.appendChild(ring);
+    setTimeout(() => { ring.classList.add("card-glow-enter"); }, 100);
+
+    // text elements (empty, filled by animation)
+    const nameEl    = document.createElement("div"); nameEl.className  = "whoami-name";  top.appendChild(nameEl);
+    const titleEl   = document.createElement("div"); titleEl.className = "whoami-title"; top.appendChild(titleEl);
+    const titleText = document.createTextNode("");
+    const br        = document.createElement("br");
+    const univEl    = document.createElement("span"); univEl.className = "univ";
+    titleEl.appendChild(titleText); titleEl.appendChild(br); titleEl.appendChild(univEl);
+
+    const hr = document.createElement("hr"); hr.className = "whoami-hr"; card.appendChild(hr);
+    const bio = document.createElement("div"); bio.className = "whoami-bio"; card.appendChild(bio);
+    const bioTitleEl = document.createElement("div"); bioTitleEl.className = "bio-title"; bio.appendChild(bioTitleEl);
+
+    softScroll();
+
+    // TYPED headers
+    const typedPieces = [
+      { target: nameEl,     text: "Hi, I am Ali" },
+      { target: titleText,  text: "Penetration Tester & Computer Science Student" },
+      { target: univEl,     text: "@ Ain Shams University" },
+      { target: bioTitleEl, text: "⟫ About Me" },
+    ];
+
+    // SLOW fade-in bio — split all paragraphs into individual sentences
+    const bioLines = [
+      "I am a dedicated computer science student with a strong passion for cybersecurity and ethical hacking.",
+      "I enjoy learning new technologies, solving complex problems, and applying my knowledge through hands-on projects, CTF competitions, and teamwork.",
+      "I have experience in network security, penetration testing, and vulnerability assessments.",
+      "I have participated in summer training programs, internships, and volunteering activities that enhanced my practical skills including",
+      "web development, AI projects, contract writing, and IT operations.",
+      "I am committed to continuous learning and contributing to real-world security challenges.",
+      "My goal is to become a professional penetration tester and security researcher, combining technical expertise with problem-solving and creativity.",
+    ];
+
+    // then bio lines slow fade
+    let bi = 0;
+    function runBio() {
+      if (cancelled || bi >= bioLines.length) { setTimeout(next, 200); return; }
+      const line = document.createElement("p");
+      line.className = "fade-in";
+      line.style.marginBottom = "2px";
+      line.textContent = bioLines[bi++];
+      bio.appendChild(line);
+      softScroll();
+      setTimeout(runBio, SLOW_MS);
     }
-    return slot;
-  }
 
-  function phHTML() {
-    return `<div class="ph">
-      <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="8" width="40" height="28" rx="3" stroke="#6ddb7a" stroke-width="2"/>
-        <path d="M4 30 L14 19 L22 27 L31 17 L44 30" stroke="#6ddb7a" stroke-width="2" stroke-linejoin="round"/>
-        <circle cx="14" cy="17" r="3" stroke="#6ddb7a" stroke-width="2"/>
-        <path d="M17 40 H31" stroke="#6ddb7a" stroke-width="2" stroke-linecap="round"/>
-        <path d="M24 36 V40" stroke="#6ddb7a" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <span>screenshot</span>
-    </div>`;
-  }
+    // run typed pieces first, then bio
+    let ti = 0;
+    function nextTyped() {
+      if (cancelled || ti >= typedPieces.length) { runBio(); return; }
+      const p = typedPieces[ti++];
+      typeText(p.target, p.text, nextTyped);
+    }
 
-  function addProject(name, tags, bullets, imgs) {
+    nextTyped();
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARD
+   — project title: char-by-char
+   — tags: appear instantly after title
+   — bullet points: line-by-line slow pop
+   — image row slots: glow entrance staggered
+   — images inside slots: glow on load
+   ══════════════════════════════════════════════════════════════ */
+function addProject(name, tags, bullets, imgs) {
+  queue.push(function(next) {
+    if (cancelled) return;
+
     const card = document.createElement("div");
     card.className = "proj-card";
+    inner.appendChild(card);
+    softScroll();
 
-    const tagHTML = tags.map(t => `<span class="proj-tag">${t}</span>`).join("");
-    const liHTML  = bullets.map(b => `<li>${b}</li>`).join("");
+    // title — char-by-char
+    const nameEl = document.createElement("div");
+    nameEl.className = "proj-name";
+    card.appendChild(nameEl);
 
-    card.innerHTML = `
-      <div class="proj-name">⟫ ${name}</div>
-      <div class="proj-tags">${tagHTML}</div>
-      <ul class="proj-bullets">${liHTML}</ul>
-    `;
+    // tags
+    const tagsEl = document.createElement("div");
+    tagsEl.className = "proj-tags";
+    tags.forEach(t => {
+      const s = document.createElement("span"); s.className = "proj-tag"; s.textContent = t;
+      tagsEl.appendChild(s);
+    });
 
+    // bullets (empty lis)
+    const ul = document.createElement("ul");
+    ul.className = "proj-bullets";
+    const liEls = bullets.map(b => {
+      const li = document.createElement("li"); ul.appendChild(li);
+      return { el: li, text: b };
+    });
+
+    // image slots (invisible, glow in after bullets done)
     const row = document.createElement("div");
     row.className = "proj-imgs";
-    (imgs && imgs.length ? imgs : []).forEach(src => row.appendChild(imgSlot(src)));
-    card.appendChild(row);
+    const slots = (imgs && imgs.length ? imgs : []).map(src => {
+      const s = imgSlot(src);
+      row.appendChild(s);
+      return s;
+    });
 
-    inner.appendChild(card);
-  }
+    // sequence
+    typeText(nameEl, "⟫ " + name, function() {
+      // show tags instantly
+      card.appendChild(tagsEl);
+      card.appendChild(ul);
+      softScroll();
 
-  function runCommand(cmd) {
-    switch(cmd) {
-
-      case "help":
-        addGap();
-        addLine('<span class="g">Available Commands:</span>');
-        addLine('<span class="g">⟫ whoami</span><span class="w">        — Learn more about me</span>');
-        addLine('<span class="g">⟫ skills</span><span class="w">        — See my skills</span>');
-        addLine('<span class="g">⟫ projects</span><span class="w">      — View my projects</span>');
-        addLine('<span class="g">⟫ contact</span><span class="w">       — Get in touch</span>');
-        addLine('<span class="g">⟫ clear</span><span class="w">         — Clear the screen</span>');
-        addLine('<span class="g">⟫ help</span><span class="w">          — Show commands</span>');
-        break;
-
-      case "whoami": {
-        addGap();
-        const card = document.createElement("div");
-        card.className = "whoami-card";
-        card.innerHTML = `
-          <div class="whoami-top">
-            <div class="avatar-ring">
-              <img src="profile pic.jpg" alt="Ali"
-                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:56px;&quot;>👤</span>';">
-            </div>
-            <div class="whoami-name">Hi, I am Ali</div>
-            <div class="whoami-title">
-              Penetration Tester &amp; Computer Science Student<br>
-              <span class="univ">@ Ain Shams University</span>
-            </div>
-          </div>
-          <hr class="whoami-hr">
-          <div class="whoami-bio">
-            <div class="bio-title">⟫ About Me</div>
-            <p>I am a dedicated computer science student with a strong passion for cybersecurity and ethical hacking. I enjoy learning new technologies, solving complex problems, and applying my knowledge through hands-on projects, CTF competitions, and teamwork.</p>
-            <p>I have experience in network security, penetration testing, and vulnerability assessments. I have participated in summer training programs, internships, and volunteering activities that enhanced my practical skills — including web development, AI projects, contract writing, and IT operations.</p>
-            <p>I am committed to continuous learning and contributing to real-world security challenges. My goal is to become a professional penetration tester and security researcher, combining technical expertise with problem-solving and creativity.</p>
-          </div>
-        `;
-        inner.appendChild(card);
-        break;
+      // bullets — slow fade in one by one
+      let bi = 0;
+      function nextBullet() {
+        if (cancelled || bi >= liEls.length) {
+          // show image row, then glow-enter each slot
+          if (slots.length > 0) {
+            card.appendChild(row);
+            softScroll();
+            glowEnterAll(slots, 100);
+            // wait long enough for last slot's animation to start
+            setTimeout(next, 100 + slots.length * 200 + 400);
+          } else {
+            setTimeout(next, 60);
+          }
+          return;
+        }
+        liEls[bi].el.textContent = liEls[bi].text;
+        liEls[bi].el.classList.add("fade-in");
+        bi++;
+        softScroll();
+        setTimeout(nextBullet, SLOW_MS);
       }
+      nextBullet();
+    });
+  });
+}
 
-      case "skills":
-        addGap();
-        addLine('<span class="g">Technical Skills</span>');
-        addSep();
-        addLine('<span class="g">⟫ Programming Languages</span>');
-        addLine('<span class="w">   C++, C#, Python, Java, JavaScript, HTML/CSS, SQL</span>');
-        addGap();
-        addLine('<span class="g">⟫ Cybersecurity</span>');
-        addLine('<span class="w">   Penetration Testing, Vulnerability Assessment, Network Security</span>');
-        addGap();
-        addLine('<span class="g">⟫ Software Development</span>');
-        addLine('<span class="w">   OOP, Data Structures &amp; Algorithms</span>');
-        addGap();
-        addLine('<span class="g">⟫ Tools &amp; Platforms</span>');
-        addLine('<span class="w">   Git/GitHub, Linux, Qt, Wireshark, Nmap, Burp Suite</span>');
-        addGap();
-        addLine('<span class="g">⟫ Languages</span>');
-        addLine('<span class="w">   Arabic (native), English</span>');
-        addGap();
-        addLine('<span class="g">⟫ Soft Skills</span>');
-        addLine('<span class="w">   Public Speaking, Presentation, Teamwork, Problem-Solving</span>');
-        break;
+/* ══════════════════════════════════════════════════════════════
+   INPUT HANDLING
+   ══════════════════════════════════════════════════════════════ */
+function addEcho(text) {
+  const d = document.createElement("div"); d.className = "echo";
+  d.innerHTML = '<span class="g">ali</span><span class="w">@portfolio:~$&nbsp;</span>'
+              + '<span style="color:#9be9a8">' + esc(text) + '</span>';
+  inner.appendChild(d);
+}
+function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-      case "projects":
-        addGap();
-        addLine('<span class="g">Projects</span>');
-        addSep();
-        addGap();
-
-        addProject(
-          "Watch-It",
-          ["Java", "OOP", "JSON", "Team Project"],
-          [
-            "Recreated a movie streaming platform applying OOP, JSON handling, and exception management.",
-            "User features: account creation, subscriptions, personalized lists, ratings with recommendations, advanced search &amp; filtering.",
-            "Admin features: CRUD operations, subscription analytics, revenue tracking, and user activity monitoring.",
-            "Built collaboratively with a team to simulate a real-world entertainment platform."
-          ],
-          ["projects/show_screen.jpg", "projects/home_page_continued.jpg","projects/search.jpg", "projects/user_login.jpg","projects/admin_dashboard.jpg"]
-        );
-
-        addProjSep();
-
-        addProject(
-          "Operating Systems Project — FOS",
-          ["C", "OS", "Memory Management"],
-          [
-            "Developed kernel-level OS components focusing on memory management.",
-            "Implemented a dynamic memory allocator and page replacement algorithms: LRU and Modified Clock.",
-            "Built and optimized page fault handling mechanisms to ensure system stability.",
-            "Applied core OS concepts: paging, working sets, and system-level testing."
-          ],
-          []
-        );
-
-        addProjSep();
-
-        addProject(
-          "Wasalni",
-          ["C++", "Qt", "JSON", "Graph Algorithms", "Team Project"],
-          [
-            "Developed a city routing visualizer with persistent map data using C++, Qt, and JSON.",
-            "Features: create and edit city networks, save maps, and run real-time route calculations.",
-            "Implemented graph algorithms: DFS, BFS, Dijkstra's, and Floyd-Warshall.",
-            "Completed as a team project, bringing graph algorithms to life through an interactive visual tool."
-          ],
-          ["projects/image.png"]
-        );
-
-        break;
-
-      case "contact":
-        addGap();
-        addLine('<span class="g">Get In Touch</span>');
-        addSep();
-        addLine('<span class="g">⟫ Phone:&nbsp;&nbsp;&nbsp;</span><a class="contact-link" href="tel:+201096101682">+20 109 610 1682</a>');
-        addLine('<span class="g">⟫ Email:&nbsp;&nbsp;&nbsp;</span><a class="contact-link" href="mailto:alimohamedali7704@gmail.com">alimohamedali7704@gmail.com</a>');
-        addLine('<span class="g">⟫ GitHub:&nbsp;&nbsp;</span><a class="contact-link" href="https://github.com/alimohamed7704" target="_blank">github.com/alimohamed7704</a>');
-        addLine('<span class="g">⟫ LinkedIn:</span><a class="contact-link" href="https://www.linkedin.com/in/ali-mohamed-a3532331a/" target="_blank">linkedin.com/in/Ali-Mohamed</a>');
-        break;
-
-      case "clear":
-        inner.innerHTML = "";
-        break;
-
-      default:
-        addLine('<span class="r">Command not found: \'' + esc(cmd) + '\'</span>'
-              + '<span class="w"> — Type </span><span class="g">help</span><span class="w"> for available commands.</span>');
-    }
-
-    outEl.scrollTop = 0;
+input.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && e.key === "c") {
+    e.preventDefault();
+    resetEngine(); inner.innerHTML = "";
+    addEcho(input.value + "^C");
+    input.value = ""; histIdx = -1; return;
   }
+  if (e.key === "Enter") {
+    const raw = input.value;
+    const cmd = raw.trim().toLowerCase();
+    input.value = ""; histIdx = -1;
+    if (!raw.trim()) return;
+    cmdHistory.unshift(raw.trim());
+    resetEngine(); inner.innerHTML = "";
+    addEcho(raw);
+    runCommand(cmd);
+    startEngine();
+    return;
+  }
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
+    return;
+  }
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    histIdx > 0 ? (histIdx--, input.value = cmdHistory[histIdx]) : (histIdx = -1, input.value = "");
+    return;
+  }
+});
 
-  document.addEventListener("click", () => input.focus());
+/* ══════════════════════════════════════════════════════════════
+   COMMANDS
+   ══════════════════════════════════════════════════════════════ */
+function runCommand(cmd) {
+  switch(cmd) {
+
+    case "help":
+      addGap();
+      // "Available Commands:" — char-by-char
+      addLineTyped("Available Commands:");
+      // the 6 command lines — slow line-by-line
+      addLinePop("⟫ whoami",   "        — Learn more about me");
+      addLinePop("⟫ skills",   "        — See my skills");
+      addLinePop("⟫ projects", "      — View my projects");
+      addLinePop("⟫ contact",  "       — Get in touch");
+      addLinePop("⟫ clear",    "         — Clear the screen");
+      addLinePop("⟫ help",     "          — Show commands");
+      break;
+
+    case "whoami":
+      addGap();
+      addWhoami();
+      break;
+
+    case "skills":
+      addGap();
+      addLineTyped("Technical Skills");
+      addSep();
+      addLineTyped("⟫ Programming Languages");
+      addLinePop("", "   C++, C#, Python, Java, JavaScript, HTML/CSS, SQL");
+      addGap();
+      addLineTyped("⟫ Cybersecurity");
+      addLinePop("", "   Penetration Testing, Vulnerability Assessment, Network Security");
+      addGap();
+      addLineTyped("⟫ Software Development");
+      addLinePop("", "   OOP, Data Structures & Algorithms");
+      addGap();
+      addLineTyped("⟫ Tools & Platforms");
+      addLinePop("", "   Git/GitHub, Linux, Qt, Wireshark, Nmap, Burp Suite");
+      addGap();
+      addLineTyped("⟫ Languages");
+      addLinePop("", "   Arabic (native), English");
+      addGap();
+      addLineTyped("⟫ Soft Skills");
+      addLinePop("", "   Public Speaking, Presentation, Teamwork, Problem-Solving");
+      break;
+
+    case "projects":
+      addGap();
+      addLineTyped("Projects");
+      addSep();
+      addGap();
+      addProject(
+        "Watch-It",
+        ["Java","OOP","JSON","Team Project"],
+        [
+          "Recreated a movie streaming platform applying OOP, JSON handling, and exception management.",
+          "User features: account creation, subscriptions, personalized lists, ratings with recommendations, advanced search & filtering.",
+          "Admin features: CRUD operations, subscription analytics, revenue tracking, and user activity monitoring.",
+          "Built collaboratively with a team to simulate a real-world entertainment platform."
+        ],
+        ["projects/show_screen.jpg","projects/home_page_continued.jpg","projects/search.jpg","projects/user_login.jpg","projects/admin_dashboard.jpg"]
+      );
+      addProjSep();
+      addProject(
+        "Operating Systems Project — FOS",
+        ["C","OS","Memory Management"],
+        [
+          "Developed kernel-level OS components focusing on memory management.",
+          "Implemented a dynamic memory allocator and page replacement algorithms: LRU and Modified Clock.",
+          "Built and optimized page fault handling mechanisms to ensure system stability.",
+          "Applied core OS concepts: paging, working sets, and system-level testing."
+        ],
+        []
+      );
+      addProjSep();
+      addProject(
+        "Wasalni",
+        ["C++","Qt","JSON","Graph Algorithms","Team Project"],
+        [
+          "Developed a city routing visualizer with persistent map data using C++, Qt, and JSON.",
+          "Features: create and edit city networks, save maps, and run real-time route calculations.",
+          "Implemented graph algorithms: DFS, BFS, Dijkstra's, and Floyd-Warshall.",
+          "Completed as a team project, bringing graph algorithms to life through an interactive visual tool."
+        ],
+        ["projects/image.png"]
+      );
+      break;
+
+    case "contact":
+      addGap();
+      addLineTyped("Get In Touch");
+      addSep();
+      addLinePopRaw([{text:"⟫ Phone:   ", color:"#6ddb7a"},{text:"+20 109 610 1682", href:"tel:+201096101682"}]);
+      addLinePopRaw([{text:"⟫ Email:   ", color:"#6ddb7a"},{text:"alimohamedali7704@gmail.com", href:"mailto:alimohamedali7704@gmail.com"}]);
+      addLinePopRaw([{text:"⟫ GitHub:  ", color:"#6ddb7a"},{text:"github.com/alimohamed7704", href:"https://github.com/alimohamed7704", target:"_blank"}]);
+      addLinePopRaw([{text:"⟫ LinkedIn:", color:"#6ddb7a"},{text:"linkedin.com/in/Ali-Mohamed", href:"https://www.linkedin.com/in/ali-mohamed-a3532331a/", target:"_blank"}]);
+      break;
+
+    case "clear":
+      resetEngine(); inner.innerHTML = "";
+      break;
+
+    default:
+      addLineTypedRaw([
+        {text:"Command not found: '"+esc(cmd)+"'", color:"#ff6b6b"},
+        {text:" — Type ", color:"#e8e8e8"},
+        {text:"help", color:"#6ddb7a"},
+        {text:" for available commands.", color:"#e8e8e8"}
+      ]);
+  }
+}
+
+document.addEventListener("click", () => input.focus());
 </script>
 </body>
 </html>
-
