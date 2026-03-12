@@ -424,7 +424,7 @@
 
     const row = document.createElement("div");
     row.className = "proj-imgs";
-    (imgs && imgs.length ? imgs : [null, null, null]).forEach(src => row.appendChild(imgSlot(src)));
+    (imgs && imgs.length ? imgs : []).forEach(src => row.appendChild(imgSlot(src)));
     card.appendChild(row);
 
     inner.appendChild(card);
@@ -569,3 +569,4 @@
 </script>
 </body>
 </html>
+
