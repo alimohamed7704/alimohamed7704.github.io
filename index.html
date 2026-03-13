@@ -604,7 +604,18 @@ function addEcho(text) {
 function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 input.addEventListener("keydown", function(e) {
-  if (e.ctrlKey && e.key === "v" && !e.shiftKey) { e.preventDefault(); return; }
+  if (e.ctrlKey && e.key === "v" && !e.shiftKey) {
+    e.preventDefault();
+    reset(); inner.innerHTML = "";
+    addEcho(input.value + "^V");
+    addLineTypedRaw([
+      {text:"Use ", color:"#e8e8e8"},
+      {text:"Ctrl+Shift+V", color:"#6ddb7a"},
+      {text:" to paste.", color:"#e8e8e8"}
+    ]);
+    startEngine();
+    return;
+  }
 
   if (e.key === "Enter") {
     const raw = input.value;
