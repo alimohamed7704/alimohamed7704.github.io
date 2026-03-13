@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Portfolio Terminal</title>
+<title>Ali Mohamed | Penetration Tester</title>
+<link rel="icon" type="image/jpeg" href="profile pic.jpg">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -105,7 +106,6 @@
   .hint-bar .hw { color:#e8e8e8; }
   .hint-bar .hg { color:#6ddb7a; }
 
-  /* blinking cursor */
   .tw-cursor {
     display: inline-block;
     width: 8px; height: 1.1em;
@@ -116,52 +116,39 @@
   }
   @keyframes blink { 50%{opacity:0;} }
 
-  /* ── simple fade in — for lines, image slots, avatar ring ── */
   @keyframes simpleFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
-
-  .fade-in {
-    opacity: 0;
-    animation: simpleFadeIn 0.6s ease-out forwards;
-  }
-
-  .card-glow-enter {
-    opacity: 0;
-    animation: simpleFadeIn 0.9s ease-out forwards;
-  }
+  .fade-in         { opacity:0; animation: simpleFadeIn 0.6s ease-out forwards; }
+  .card-glow-enter { opacity:0; animation: simpleFadeIn 0.9s ease-out forwards; }
 
   /* whoami */
-  .whoami-card  { display:flex; flex-direction:column; align-items:center; padding:18px 0 14px; }
-  .whoami-top   { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:24px; }
-  .avatar-ring  {
+  .whoami-card { display:flex; flex-direction:column; align-items:center; padding:18px 0 14px; }
+  .whoami-top  { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:24px; }
+  .avatar-ring {
     width:clamp(80px,12vw,140px); height:clamp(80px,12vw,140px);
     border-radius:50%; border:2px solid #6ddb7a;
     box-shadow:0 0 24px rgba(109,219,122,.35);
     background:rgba(109,219,122,.07);
     overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  /* profile pic — starts hidden, glow in on load */
-  .avatar-ring img {
-    width:100%; height:100%; object-fit:cover; border-radius:50%;
-    opacity:0;
-  }
+  .avatar-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; opacity:0; }
   .avatar-ring img.img-revealed { animation: simpleFadeIn 0.9s ease-out forwards; }
 
   .whoami-name  { color:#6ddb7a; font-size:clamp(16px,2.5vw,24px); font-weight:bold; text-align:center; min-height:1.4em; }
   .whoami-title { color:#e8e8e8; font-size:clamp(12px,1.8vw,18px); text-align:center; line-height:1.75; min-height:1.4em; }
   .whoami-title .univ { color:#6ddb7a; }
-  .whoami-hr    { width:80%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
-  .whoami-bio   { width:100%; font-size:clamp(12px,1.5vw,16px); line-height:1.95; color:#e8e8e8; }
+  .whoami-hr   { width:80%; border:none; border-top:1px solid rgba(232,232,232,0.2); margin-bottom:20px; }
+  .whoami-bio  { width:100%; font-size:clamp(12px,1.5vw,16px); line-height:1.95; color:#e8e8e8; }
   .whoami-bio .bio-title { color:#6ddb7a; font-size:clamp(13px,1.6vw,17px); font-weight:bold; margin-bottom:10px; min-height:1.4em; }
   .whoami-bio p { margin-bottom:13px; min-height:1.4em; }
 
   /* projects */
-  .proj-card    { display:flex; flex-direction:column; }
-  .proj-name    { color:#6ddb7a; font-size:clamp(13px,1.8vw,18px); font-weight:bold; margin-bottom:5px; min-height:1.4em; }
-  .proj-tags    { margin-bottom:8px; }
-  .proj-tag     { display:inline-block; font-size:clamp(10px,1.1vw,12px); color:#529f5b; border:1px solid rgba(82,159,91,.4); border-radius:3px; padding:0 7px; margin-right:5px; margin-bottom:4px; }
+  .proj-card   { display:flex; flex-direction:column; }
+  .proj-name   { color:#6ddb7a; font-size:clamp(13px,1.8vw,18px); font-weight:bold; margin-bottom:5px; min-height:1.4em; }
+  .proj-tags   { margin-bottom:8px; }
+  .proj-tag    { display:inline-block; font-size:clamp(10px,1.1vw,12px); color:#529f5b; border:1px solid rgba(82,159,91,.4); border-radius:3px; padding:0 7px; margin-right:5px; margin-bottom:4px; }
   .proj-bullets { list-style:none; padding:0; margin:0 0 14px 0; }
   .proj-bullets li { font-size:clamp(11px,1.5vw,15px); color:#e8e8e8; line-height:1.75; padding-left:16px; position:relative; min-height:1.4em; }
   .proj-bullets li::before { content:"›"; position:absolute; left:0; color:#529f5b; }
@@ -175,11 +162,12 @@
     border:1px solid rgba(109,219,122,.22); box-shadow:0 4px 16px rgba(0,0,0,.5);
     overflow:hidden; background:rgba(8,20,12,.7);
     display:flex; align-items:center; justify-content:center;
-    /* starts invisible — JS adds card-glow-enter */
-    opacity: 0;
+    opacity:0;
   }
-  .proj-img-slot img { width:100%; height:100%; object-fit:cover; display:block; opacity:0; }
-  .proj-img-slot img.img-revealed { animation: simpleFadeIn 0.9s ease-out forwards; }
+  .proj-img-slot img   { width:100%; height:100%; object-fit:cover; display:block; opacity:0; }
+  .proj-img-slot img.img-revealed   { animation: simpleFadeIn 0.9s ease-out forwards; }
+  .proj-img-slot video { width:100%; height:100%; object-fit:cover; display:block; opacity:0; }
+  .proj-img-slot video.img-revealed { animation: simpleFadeIn 0.9s ease-out forwards; }
 
   .proj-img-slot .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; width:100%; height:100%; color:rgba(109,219,122,.3); font-size:12px; }
   .proj-img-slot .ph svg { opacity:.28; }
@@ -200,74 +188,77 @@
     <span class="p-user">ali</span><span class="p-rest">@portfolio:~$&nbsp;</span>
     <input id="cmd" autofocus autocomplete="off" spellcheck="false">
   </div>
-
-  <div id="output">
-    <div id="out-inner">
-      <div class="line g" style="font-size:clamp(16px,2.5vw,22px);font-weight:bold;margin-bottom:4px;">Welcome to Ali's Portfolio</div>
-      <div class="line w" style="font-size:clamp(13px,1.8vw,18px);margin-bottom:6px;">Type a command to begin:</div>
-      <hr class="sep">
-      <div class="line g" style="font-size:clamp(13px,1.8vw,18px);margin-bottom:2px;">Available Commands:</div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ whoami</span><span class="w">        — Learn more about me</span></div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ skills</span><span class="w">        — See my skills</span></div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ projects</span><span class="w">      — View my projects</span></div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ contact</span><span class="w">       — Get in touch</span></div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ clear</span><span class="w">         — Clear the screen</span></div>
-      <div class="line" style="font-size:clamp(12px,1.7vw,17px);"><span class="g">⟫ help</span><span class="w">          — Show commands</span></div>
-    </div>
-  </div>
-
+  <div id="output"><div id="out-inner"></div></div>
   <div class="hint-bar">
     <span class="hw">Hint:&nbsp; Type </span><span class="hg">"help"</span><span class="hw"> for commands.</span>
   </div>
 </div>
 
 <script>
-
-const CHAR_MS  = 32;   // ms per character for typewriter lines
-const SLOW_MS  = 800;  // ms between slow dramatic line-by-line items
+const CHAR_MS = 32;
+const SLOW_MS = 800;
 
 const outEl = document.getElementById("output");
 const inner = document.getElementById("out-inner");
 const input = document.getElementById("cmd");
 
+/* ── Generation counter ──────────────────────────────────────────
+   Every time we reset, gen is incremented.
+   Every async callback captures its own gen at creation time and
+   does nothing if gen has moved on. This is the single source of
+   truth for "is this animation still wanted?" — no other flag needed.
+   ──────────────────────────────────────────────────────────────── */
+let gen        = 0;   // current generation
 let queue      = [];
 let running    = false;
-let cancelled  = false;
 let cmdHistory = [];
 let histIdx    = -1;
 
-function resetEngine() { cancelled = true; queue = []; running = false; }
-function startEngine() { cancelled = false; if (!running) pump(); }
+function reset() {
+  gen++;            // invalidate ALL pending callbacks instantly
+  queue    = [];
+  running  = false;
+}
+
+function startEngine() {
+  if (!running) pump();
+}
+
 function pump() {
-  if (cancelled || queue.length === 0) { running = false; return; }
+  if (queue.length === 0) { running = false; return; }
   running = true;
   queue.shift()(pump);
 }
 
-function scroll()     { outEl.scrollTop = outEl.scrollHeight; }
-function softScroll() {
-  // only auto-scroll if user is within 120px of the bottom
-  const distFromBottom = outEl.scrollHeight - outEl.scrollTop - outEl.clientHeight;
-  if (distFromBottom < 120) outEl.scrollTop = outEl.scrollHeight;
+/* safe setTimeout — fires only if gen hasn't changed */
+function later(ms, g, fn) {
+  setTimeout(function() { if (gen === g) fn(); }, ms);
 }
 
-/* ── typeText: char-by-char into any node with .textContent ── */
-function typeText(el, text, next) {
+function softScroll() {
+  const d = outEl.scrollHeight - outEl.scrollTop - outEl.clientHeight;
+  if (d < 120) outEl.scrollTop = outEl.scrollHeight;
+}
+
+/* ── typeText ──────────────────────────────────────────────────── */
+function typeText(el, text, g, done) {
   let i = 0;
   function tick() {
-    if (cancelled) { el.textContent = text; next(); return; }
-    if (i >= text.length) { next(); return; }
+    if (gen !== g) return;          // generation mismatch — stop dead
+    if (i >= text.length) { done(); return; }
     el.textContent += text[i++];
     softScroll();
-    setTimeout(tick, CHAR_MS);
+    later(CHAR_MS, g, tick);
   }
   tick();
 }
 
-/* ── qLineTyped: typewriter line (char-by-char), supports coloured segments ── */
+/* ── qLineTyped ────────────────────────────────────────────────── */
 function qLineTyped(segments, cls, style) {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
+    if (gen !== g) return;  // shouldn't happen but guard anyway
+
     const div = document.createElement("div");
     div.className = cls || "line";
     if (style) div.setAttribute("style", style);
@@ -294,20 +285,25 @@ function qLineTyped(segments, cls, style) {
 
     softScroll();
     let si = 0;
+
     function nextSeg() {
-      if (cancelled) {
-        segments.forEach((s,i) => { spanEls[i].textContent = s.text; });
-        cur.remove(); next(); return;
+      if (gen !== g) return;
+      if (si >= segments.length) {
+        cur.remove();
+        softScroll();
+        later(60, g, next);
+        return;
       }
-      if (si >= segments.length) { cur.remove(); softScroll(); setTimeout(next, 60); return; }
-      const el = spanEls[si], text = segments[si].text; si++;
+      const el   = spanEls[si];
+      const text = segments[si].text;
+      si++;
       let ci = 0;
       function typeChar() {
-        if (cancelled) { el.textContent = text; nextSeg(); return; }
+        if (gen !== g) return;
         if (ci >= text.length) { nextSeg(); return; }
         el.textContent += text[ci++];
         softScroll();
-        setTimeout(typeChar, CHAR_MS);
+        later(CHAR_MS, g, typeChar);
       }
       typeChar();
     }
@@ -315,10 +311,10 @@ function qLineTyped(segments, cls, style) {
   });
 }
 
-/* ── qLinePop: whole line fades in at once, then waits SLOW_MS ── */
+/* ── qLinePop ──────────────────────────────────────────────────── */
 function qLinePop(segments, cls, style) {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
     const div = document.createElement("div");
     div.className = (cls || "line") + " fade-in";
     if (style) div.setAttribute("style", style);
@@ -338,30 +334,30 @@ function qLinePop(segments, cls, style) {
     });
     inner.appendChild(div);
     softScroll();
-    setTimeout(next, SLOW_MS);
+    later(SLOW_MS, g, next);
   });
 }
 
-/* ── qSep / qGap ── */
+/* ── qSep / qGap ───────────────────────────────────────────────── */
 function qSep(cls) {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
     const hr = document.createElement("hr");
     hr.className = cls || "sep";
     inner.appendChild(hr);
-    setTimeout(next, 20);
+    later(20, g, next);
   });
 }
 function qGap() {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
     const d = document.createElement("div"); d.style.height = "5px";
     inner.appendChild(d);
-    setTimeout(next, 5);
+    later(5, g, next);
   });
 }
 
-/* ── convenience wrappers ── */
+/* ── convenience wrappers ──────────────────────────────────────── */
 function addLineTyped(g, w) {
   const segs = [];
   if (g) segs.push({ text: g, color: "#6ddb7a" });
@@ -382,7 +378,7 @@ function addSep()     { qSep("sep"); }
 function addProjSep() { qSep("proj-sep"); }
 function addGap()     { qGap(); }
 
-/* ── image helpers ── */
+/* ── image / video helpers ─────────────────────────────────────── */
 function phHTML() {
   return `<div class="ph">
     <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
@@ -403,11 +399,7 @@ function imgSlot(src) {
     const img = document.createElement("img");
     img.src = src; img.alt = "";
     img.onload  = function() { this.classList.add("img-revealed"); };
-    img.onerror = function() {
-      // placeholder is visible — reset slot opacity and show ph
-      slot.style.opacity = "1";
-      slot.innerHTML = phHTML();
-    };
+    img.onerror = function() { slot.style.opacity = "1"; slot.innerHTML = phHTML(); };
     slot.appendChild(img);
   } else {
     slot.style.opacity = "1";
@@ -416,24 +408,43 @@ function imgSlot(src) {
   return slot;
 }
 
-/* stagger glow entrance on a list of elements */
-function glowEnterAll(els, baseDelay) {
+function videoSlot(src) {
+  const slot = document.createElement("div");
+  slot.className = "proj-img-slot";
+  const vid = document.createElement("video");
+  vid.src = src;
+  vid.autoplay = true;
+  vid.muted = true;
+  vid.loop = true;
+  vid.playsInline = true;
+  vid.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;opacity:0;";
+  vid.oncanplay = function() {
+    if (!vid._revealed) { vid._revealed = true; vid.classList.add("img-revealed"); }
+  };
+  vid.onerror = function() {
+    slot.style.opacity = "1";
+    slot.innerHTML = `<div class="ph">
+      <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+        <rect x="4" y="8" width="40" height="28" rx="3" stroke="#6ddb7a" stroke-width="2"/>
+        <polygon points="19,16 35,24 19,32" fill="#6ddb7a" opacity="0.5"/>
+      </svg><span>video</span></div>`;
+  };
+  slot.appendChild(vid);
+  return slot;
+}
+
+function glowEnterAll(els, baseDelay, g) {
   els.forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.add("card-glow-enter");
-    }, baseDelay + i * 200);
+    later(baseDelay + i * 200, g, function() { el.classList.add("card-glow-enter"); });
   });
 }
 
 /* ══════════════════════════════════════════════════════════════
    WHOAMI
-   — avatar-ring: glow entrance
-   — name, title, univ, bio-title: char-by-char
-   — 3 bio paragraphs: line-by-line (SLOW_MS each)
    ══════════════════════════════════════════════════════════════ */
 function addWhoami() {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
 
     const card = document.createElement("div");
     card.className = "whoami-card";
@@ -443,7 +454,6 @@ function addWhoami() {
     top.className = "whoami-top";
     card.appendChild(top);
 
-    // avatar ring — glow entrance
     const ring = document.createElement("div");
     ring.className = "avatar-ring";
     const profImg = document.createElement("img");
@@ -454,18 +464,17 @@ function addWhoami() {
       this.parentElement.innerHTML = '<span style="font-size:56px">👤</span>';
     };
     ring.appendChild(profImg);
-    // ring starts invisible, glow in right away
     ring.style.opacity = "0";
     top.appendChild(ring);
-    setTimeout(() => { ring.classList.add("card-glow-enter"); }, 100);
+    later(100, g, function() { ring.classList.add("card-glow-enter"); });
 
-    // text elements (empty, filled by animation)
     const nameEl    = document.createElement("div"); nameEl.className  = "whoami-name";  top.appendChild(nameEl);
     const titleEl   = document.createElement("div"); titleEl.className = "whoami-title"; top.appendChild(titleEl);
     const titleText = document.createTextNode("");
-    const br        = document.createElement("br");
     const univEl    = document.createElement("span"); univEl.className = "univ";
-    titleEl.appendChild(titleText); titleEl.appendChild(br); titleEl.appendChild(univEl);
+    titleEl.appendChild(titleText);
+    titleEl.appendChild(document.createElement("br"));
+    titleEl.appendChild(univEl);
 
     const hr = document.createElement("hr"); hr.className = "whoami-hr"; card.appendChild(hr);
     const bio = document.createElement("div"); bio.className = "whoami-bio"; card.appendChild(bio);
@@ -473,7 +482,6 @@ function addWhoami() {
 
     softScroll();
 
-    // TYPED headers
     const typedPieces = [
       { target: nameEl,     text: "Hi, I am Ali" },
       { target: titleText,  text: "Penetration Tester & Computer Science Student" },
@@ -481,65 +489,56 @@ function addWhoami() {
       { target: bioTitleEl, text: "⟫ About Me" },
     ];
 
-    // SLOW fade-in bio — split all paragraphs into individual sentences
     const bioLines = [
       "I am a dedicated computer science student with a strong passion for cybersecurity and ethical hacking.",
       "I enjoy learning new technologies, solving complex problems, and applying my knowledge through hands-on projects, CTF competitions, and teamwork.",
       "I have experience in network security, penetration testing, and vulnerability assessments.",
-      "I have participated in summer training programs, internships, and volunteering activities that enhanced my practical skills including",
-      "web development, AI projects, contract writing, and IT operations.",
+      "I have participated in summer training programs, internships, and volunteering activities that enhanced my practical skills including web",
+      "development, AI projects, contract writing, and IT operations.",
       "I am committed to continuous learning and contributing to real-world security challenges.",
       "My goal is to become a professional penetration tester and security researcher, combining technical expertise with problem-solving and creativity.",
     ];
 
-    // then bio lines slow fade
     let bi = 0;
     function runBio() {
-      if (cancelled || bi >= bioLines.length) { setTimeout(next, 200); return; }
+      if (gen !== g) return;
+      if (bi >= bioLines.length) { later(200, g, next); return; }
       const line = document.createElement("p");
       line.className = "fade-in";
-      line.style.marginBottom = "2px";
+      line.style.marginBottom = "3px";
       line.textContent = bioLines[bi++];
       bio.appendChild(line);
       softScroll();
-      setTimeout(runBio, SLOW_MS);
+      later(SLOW_MS, g, runBio);
     }
 
-    // run typed pieces first, then bio
     let ti = 0;
     function nextTyped() {
-      if (cancelled || ti >= typedPieces.length) { runBio(); return; }
+      if (gen !== g) return;
+      if (ti >= typedPieces.length) { runBio(); return; }
       const p = typedPieces[ti++];
-      typeText(p.target, p.text, nextTyped);
+      typeText(p.target, p.text, g, nextTyped);
     }
-
     nextTyped();
   });
 }
 
 /* ══════════════════════════════════════════════════════════════
    PROJECT CARD
-   — project title: char-by-char
-   — tags: appear instantly after title
-   — bullet points: line-by-line slow pop
-   — image row slots: glow entrance staggered
-   — images inside slots: glow on load
    ══════════════════════════════════════════════════════════════ */
-function addProject(name, tags, bullets, imgs) {
+function addProject(name, tags, bullets, media) {
   queue.push(function(next) {
-    if (cancelled) return;
+    const g = gen;
 
     const card = document.createElement("div");
     card.className = "proj-card";
     inner.appendChild(card);
     softScroll();
 
-    // title — char-by-char
     const nameEl = document.createElement("div");
     nameEl.className = "proj-name";
     card.appendChild(nameEl);
 
-    // tags
     const tagsEl = document.createElement("div");
     tagsEl.className = "proj-tags";
     tags.forEach(t => {
@@ -547,7 +546,6 @@ function addProject(name, tags, bullets, imgs) {
       tagsEl.appendChild(s);
     });
 
-    // bullets (empty lis)
     const ul = document.createElement("ul");
     ul.className = "proj-bullets";
     const liEls = bullets.map(b => {
@@ -555,35 +553,31 @@ function addProject(name, tags, bullets, imgs) {
       return { el: li, text: b };
     });
 
-    // image slots (invisible, glow in after bullets done)
     const row = document.createElement("div");
     row.className = "proj-imgs";
-    const slots = (imgs && imgs.length ? imgs : []).map(src => {
-      const s = imgSlot(src);
+    const slots = (media && media.length ? media : []).map(m => {
+      const s = (m.type === "video") ? videoSlot(m.src) : imgSlot(m.src);
       row.appendChild(s);
       return s;
     });
 
-    // sequence
-    typeText(nameEl, "⟫ " + name, function() {
-      // show tags instantly
+    typeText(nameEl, "⟫ " + name, g, function() {
+      if (gen !== g) return;
       card.appendChild(tagsEl);
       card.appendChild(ul);
       softScroll();
 
-      // bullets — slow fade in one by one
       let bi = 0;
       function nextBullet() {
-        if (cancelled || bi >= liEls.length) {
-          // show image row, then glow-enter each slot
+        if (gen !== g) return;
+        if (bi >= liEls.length) {
           if (slots.length > 0) {
             card.appendChild(row);
             softScroll();
-            glowEnterAll(slots, 100);
-            // wait long enough for last slot's animation to start
-            setTimeout(next, 100 + slots.length * 200 + 400);
+            glowEnterAll(slots, 100, g);
+            later(100 + slots.length * 200 + 400, g, next);
           } else {
-            setTimeout(next, 60);
+            later(60, g, next);
           }
           return;
         }
@@ -591,7 +585,7 @@ function addProject(name, tags, bullets, imgs) {
         liEls[bi].el.classList.add("fade-in");
         bi++;
         softScroll();
-        setTimeout(nextBullet, SLOW_MS);
+        later(SLOW_MS, g, nextBullet);
       }
       nextBullet();
     });
@@ -610,19 +604,16 @@ function addEcho(text) {
 function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 input.addEventListener("keydown", function(e) {
-  if (e.ctrlKey && e.key === "c") {
-    e.preventDefault();
-    resetEngine(); inner.innerHTML = "";
-    addEcho(input.value + "^C");
-    input.value = ""; histIdx = -1; return;
-  }
+  if (e.ctrlKey && e.key === "v" && !e.shiftKey) { e.preventDefault(); return; }
+
   if (e.key === "Enter") {
     const raw = input.value;
     const cmd = raw.trim().toLowerCase();
     input.value = ""; histIdx = -1;
     if (!raw.trim()) return;
     cmdHistory.unshift(raw.trim());
-    resetEngine(); inner.innerHTML = "";
+    reset();
+    inner.innerHTML = "";
     addEcho(raw);
     runCommand(cmd);
     startEngine();
@@ -648,15 +639,15 @@ function runCommand(cmd) {
 
     case "help":
       addGap();
-      // "Available Commands:" — char-by-char
       addLineTyped("Available Commands:");
-      // the 6 command lines — slow line-by-line
-      addLinePop("⟫ whoami",   "        — Learn more about me");
-      addLinePop("⟫ skills",   "        — See my skills");
-      addLinePop("⟫ projects", "      — View my projects");
-      addLinePop("⟫ contact",  "       — Get in touch");
-      addLinePop("⟫ clear",    "         — Clear the screen");
-      addLinePop("⟫ help",     "          — Show commands");
+      addLinePop("⟫ whoami",    "       — Learn more about me");
+      addLinePop("⟫ education", "    — My academic background");
+      addLinePop("⟫ skills",    "       — See my skills");
+      addLinePop("⟫ projects",  "     — View my projects");
+      addLinePop("⟫ resume",    "       — Open my resume");
+      addLinePop("⟫ contact",   "      — Get in touch");
+      addLinePop("⟫ clear",     "        — Clear the screen");
+      addLinePop("⟫ help",      "         — Show commands");
       break;
 
     case "whoami":
@@ -664,9 +655,20 @@ function runCommand(cmd) {
       addWhoami();
       break;
 
+    case "education":
+      addGap();
+      addLineTyped("Education");
+      addSep();
+      addGap();
+      addLineTyped("⟫ Bachelor of Science in Computer Science");
+      addLinePop("", "   Ain Shams University");
+      addLinePop("", "   Sep 2023 — Jun 2027");
+      addLinePop("", "   GPA: 3.531");
+      break;
+
     case "skills":
       addGap();
-      addLineTyped("My Skills");
+      addLineTyped("Technical Skills");
       addSep();
       addLineTyped("⟫ Programming Languages");
       addLinePop("", "   C++, C#, Python, Java, JavaScript, HTML/CSS, SQL");
@@ -693,18 +695,6 @@ function runCommand(cmd) {
       addSep();
       addGap();
       addProject(
-        "Watch-It",
-        ["Java","OOP","JSON","Team Project"],
-        [
-          "Recreated a movie streaming platform applying OOP, JSON handling, and exception management.",
-          "User features: account creation, subscriptions, personalized lists, ratings with recommendations, advanced search & filtering.",
-          "Admin features: CRUD operations, subscription analytics, revenue tracking, and user activity monitoring.",
-          "Built collaboratively with a team to simulate a real-world entertainment platform."
-        ],
-        ["projects/show_screen.jpg","projects/home_page_continued.jpg","projects/search.jpg","projects/user_login.jpg","projects/admin_dashboard.jpg"]
-      );
-      addProjSep();
-      addProject(
         "Operating Systems Project — FOS",
         ["C","OS","Memory Management"],
         [
@@ -717,6 +707,25 @@ function runCommand(cmd) {
       );
       addProjSep();
       addProject(
+        "Watch-It",
+        ["Java","OOP","JSON","Team Project"],
+        [
+          "Recreated a movie streaming platform applying OOP, JSON handling, and exception management.",
+          "User features: account creation, subscriptions, personalized lists, ratings with recommendations, advanced search & filtering.",
+          "Admin features: CRUD operations, subscription analytics, revenue tracking, and user activity monitoring.",
+          "Built collaboratively with a team to simulate a real-world entertainment platform."
+        ],
+        [
+          { type:"img",   src:"projects/show_screen.jpg" },
+          { type:"img",   src:"projects/home_page_continued.jpg" },
+          { type:"img",   src:"projects/search.jpg" },
+          { type:"img",   src:"projects/user_login.jpg" },
+          { type:"img",   src:"projects/admin_dashboard.jpg" },
+          { type:"video", src:"projects/Watch-it.mp4" }
+        ]
+      );
+      addProjSep();
+      addProject(
         "Wasalni",
         ["C++","Qt","JSON","Graph Algorithms","Team Project"],
         [
@@ -725,8 +734,18 @@ function runCommand(cmd) {
           "Implemented graph algorithms: DFS, BFS, Dijkstra's, and Floyd-Warshall.",
           "Completed as a team project, bringing graph algorithms to life through an interactive visual tool."
         ],
-        ["projects/image.png"]
+        [
+          { type:"img",   src:"projects/image.png" },
+          { type:"video", src:"projects/wasalni.mp4" }
+        ]
       );
+      break;
+
+    case "resume":
+      addGap();
+      addLineTyped("Resume");
+      addSep();
+      addLinePopRaw([{text:"⟫ Resume: ", color:"#6ddb7a"},{text:"Ali Mohamed.pdf", href:"https://drive.google.com/file/d/1T1Meptg9eb4Y6Qaw2NajHk7zwwFfISMr/view?usp=drive_link", target:"_blank"}]);
       break;
 
     case "contact":
@@ -735,12 +754,12 @@ function runCommand(cmd) {
       addSep();
       addLinePopRaw([{text:"⟫ Phone:   ", color:"#6ddb7a"},{text:"+20 109 610 1682", href:"tel:+201096101682"}]);
       addLinePopRaw([{text:"⟫ Email:   ", color:"#6ddb7a"},{text:"alimohamedali7704@gmail.com", href:"mailto:alimohamedali7704@gmail.com"}]);
-      addLinePopRaw([{text:"⟫ GitHub:  ", color:"#6ddb7a"},{text:"github.com/alimohamed7704", href:"https://github.com/alimohamed7704", target:"_blank"}]);
       addLinePopRaw([{text:"⟫ LinkedIn:", color:"#6ddb7a"},{text:"linkedin.com/in/Ali-Mohamed", href:"https://www.linkedin.com/in/ali-mohamed-a3532331a/", target:"_blank"}]);
+      addLinePopRaw([{text:"⟫ GitHub:  ", color:"#6ddb7a"},{text:"github.com/alimohamed7704", href:"https://github.com/alimohamed7704", target:"_blank"}]);
       break;
 
     case "clear":
-      resetEngine(); inner.innerHTML = "";
+      reset(); inner.innerHTML = "";
       break;
 
     default:
@@ -753,8 +772,48 @@ function runCommand(cmd) {
   }
 }
 
-document.addEventListener("click", () => input.focus());
+document.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && !e.shiftKey && e.key === "c") {
+    if (window.getSelection().toString().length > 0) return;
+    e.preventDefault();
+    reset(); inner.innerHTML = "";
+    addEcho(input.value + "^C");
+    input.value = ""; histIdx = -1;
+    input.focus();
+    return;
+  }
+  if (e.ctrlKey && !e.shiftKey && e.key === "v") e.preventDefault();
+});
+
+/* ══════════════════════════════════════════════════════════════
+   WELCOME SCREEN
+   ══════════════════════════════════════════════════════════════ */
+function showWelcome() {
+  qLineTyped([{ text: "Welcome to Ali's Portfolio", color: "#6ddb7a" }], "line", "font-size:clamp(16px,2.5vw,22px);font-weight:bold;margin-bottom:4px;");
+  qLineTyped([{ text: "Type a command to begin:", color: "#e8e8e8" }], "line", "font-size:clamp(13px,1.8vw,18px);margin-bottom:6px;");
+  qSep("sep");
+  qLineTyped([{ text: "Available Commands:", color: "#6ddb7a" }], "line", "font-size:clamp(13px,1.8vw,18px);margin-bottom:2px;");
+  const cmds = [
+    ["⟫ whoami",    "       — Learn more about me"],
+    ["⟫ education", "    — My academic background"],
+    ["⟫ skills",    "       — See my skills"],
+    ["⟫ projects",  "     — View my projects"],
+    ["⟫ resume",    "       — Open my resume"],
+    ["⟫ contact",   "      — Get in touch"],
+    ["⟫ clear",     "        — Clear the screen"],
+    ["⟫ help",      "         — Show commands"],
+  ];
+  cmds.forEach(([g, w]) => {
+    qLinePop([{ text: g, color: "#6ddb7a" }, { text: w, color: "#e8e8e8" }], "line", "font-size:clamp(12px,1.7vw,17px);");
+  });
+}
+
+showWelcome();
+startEngine();
+
+document.addEventListener("click", () => {
+  if (window.getSelection().toString().length === 0) input.focus();
+});
 </script>
 </body>
 </html>
-
